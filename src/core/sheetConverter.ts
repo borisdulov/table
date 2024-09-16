@@ -10,16 +10,16 @@ export interface IConvertedCell {
   column: number;
 }
 
-interface IRichTextValue {
+export interface IRichTextValue {
   richText: { text: string }[];
 }
 
-interface IHyperlinkValue {
+export interface IHyperlinkValue {
   hyperlink: string;
   text: string;
 }
 
-interface IHyperlinkAndRichTextValue {
+export interface IHyperlinkAndRichTextValue {
   hyperlink: string;
   text: { richText: { text: string }[] };
 }
