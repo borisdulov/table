@@ -13,3 +13,7 @@ export const handleUrl = (url: string) => {
 export const letterToNumber = (letter: string): number => {
   return letter.toUpperCase().charCodeAt(0) - 64;
 };
+
+export const areObjectsEqual = (obj1: any, obj2: any): boolean => {
+  return JSON.stringify(obj1) === JSON.stringify(obj2);
+};

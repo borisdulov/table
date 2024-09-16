@@ -32,7 +32,6 @@ export abstract class SheetConverter {
       const convertedRow = this.convertRow(row);
       convertedSheet.push(convertedRow);
     });
-    console.log(convertedSheet);
     return convertedSheet;
   }
 

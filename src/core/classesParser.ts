@@ -1,6 +1,6 @@
 import { IConvertedCell, IConvertedSheet, SheetConverter } from "./sheetConverter";
 import { SheetLoader } from "./sheetLoader";
-import { isTime, letterToNumber } from "../utils/utils";
+import { areObjectsEqual, isTime, letterToNumber } from "../utils/utils";
 import lodash from "lodash";
 
 interface IParseClassesDTO {
@@ -43,8 +43,8 @@ export abstract class ClassesParser {
       return null;
     }
 
-    // Чистим от путых строк
-    const cleanWeek = this.removeBlanks(week);
+    // Чистим от путых строк и повторений
+    const cleanWeek = this.cleanWeek(week);
 
     console.log(cleanWeek);
     return cleanWeek;
@@ -59,7 +59,6 @@ export abstract class ClassesParser {
     for (const row of sheet) {
       // Время и учебные дисциплины
       const time = row.find((cell) => cell.column === leftBorder);
-      console.log(time);
       if (!time || !isTime(time.text)) continue;
       let disciplines = row.filter((cell) => cell.column > leftBorder && cell.column < rightBorder);
       disciplines = lodash.uniqBy(disciplines, "text"); // Удаляет дубликаты
@@ -77,13 +76,15 @@ export abstract class ClassesParser {
   }
 
   // Удаляет пустые строки вначале и в конце
-  private static removeBlanks = (week: IClassesWeek): IClassesWeek => {
-    console.log("before ", week);
+  // Удаляет дубликаты строк
+  private static cleanWeek = (week: IClassesWeek): IClassesWeek => {
     let resultWeek: IClassesWeek = {};
     Object.keys(week).forEach((key) => {
       let resultDay: IClassesDay = [];
       let rowsBuffer: IClassesRow[] = [];
+      let previousRow: IClassesRow | null = null;
       for (const row of week[key]) {
+        if (areObjectsEqual(row, previousRow)) continue;
         if (row.disciplines.length > 0) {
           resultDay.push(...rowsBuffer);
           resultDay.push(row);
@@ -93,6 +94,7 @@ export abstract class ClassesParser {
             rowsBuffer.push(row);
           }
         }
+        previousRow = row;
       }
       resultWeek[key] = resultDay;
     });
