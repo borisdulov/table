@@ -78,14 +78,15 @@ export abstract class ClassesParser {
 
   // Удаляет пустые строки вначале и в конце
   private static removeBlanks = (week: IClassesWeek): IClassesWeek => {
+    console.log("before ", week);
     let resultWeek: IClassesWeek = {};
     Object.keys(week).forEach((key) => {
       let resultDay: IClassesDay = [];
       let rowsBuffer: IClassesRow[] = [];
       for (const row of week[key]) {
         if (row.disciplines.length > 0) {
-          resultDay.push(row);
           resultDay.push(...rowsBuffer);
+          resultDay.push(row);
           rowsBuffer = [];
         } else {
           if (resultDay.length > 0) {
