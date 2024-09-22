@@ -35,7 +35,7 @@ export const DayChipComponent: React.FC<DayChipProps> = ({ dayId }) => {
   const currentDate = new Date();
   const dayOffset = dayId - todayDayOfWeek();
   const targetDate = new Date(currentDate.getTime() + dayOffset * 24 * 60 * 60 * 1000);
-  const formattedDate = `${targetDate.getDate()}.${targetDate.getMonth() + 1}.${targetDate.getFullYear()}`;
+  const formattedDate = `${targetDate.getDate()}.${String(targetDate.getMonth() + 1).padStart(2, "0")}`;
 
   return (
     <div className="flex w-full mb-2 grid grid-cols-3">
