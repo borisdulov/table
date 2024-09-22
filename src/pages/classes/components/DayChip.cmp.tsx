@@ -39,14 +39,12 @@ export const DayChipComponent: React.FC<DayChipProps> = ({ dayId }) => {
 
   return (
     <div className="flex w-full mb-2 grid grid-cols-3">
-      <Chip color="default" className="justify-self-start ml-2">
+      <Chip color="default" variant="flat" className="justify-self-start ml-2">
         {formattedDate}
       </Chip>
-
       <Chip color="secondary" className="justify-self-center" variant="flat">
         {daysOfWeek[dayId]}
       </Chip>
-
       <YesterdayTodayTomorrowComponent dayId={dayId} />
     </div>
   );
