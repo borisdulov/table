@@ -49,6 +49,10 @@ const PlaceComponent: React.FC<PlaceProps> = ({ place }) => {
   }
 };
 
+const TextComponent: React.FC<{ text: string }> = ({ text }) => {
+  return <p className="text-xs">{text}</p>;
+};
+
 interface DayCardProps {
   day: IClassesDay;
 }
@@ -64,11 +68,13 @@ export const DayCardComponent: React.FC<DayCardProps> = ({ day }) => {
       <TableBody>
         {day.map((row, id) => (
           <TableRow key={id}>
-            <TableCell className="text-xs">{row.time.text}</TableCell>
             <TableCell>
+              <TextComponent text={row.time.text} />
+            </TableCell>
+            <TableCell className="w-full">
               <DisciplinesComponent disciplines={row.disciplines} />
             </TableCell>
-            <TableCell>
+            <TableCell className="text-center">
               <PlaceComponent place={row.place} />
             </TableCell>
           </TableRow>
