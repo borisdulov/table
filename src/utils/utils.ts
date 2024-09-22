@@ -19,3 +19,5 @@ export const areObjectsEqual = (obj1: any, obj2: any): boolean => {
 };
 
 export const daysOfWeek = ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"];
+
+export const todayDayOfWeek = () => new Date().getDay() - 1;
