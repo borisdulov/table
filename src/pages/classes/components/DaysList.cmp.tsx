@@ -21,13 +21,13 @@ export const DaysListComponent: React.FC<DaysListProps> = ({ week }) => {
 
   useEffect(() => {
     if (!todayRef.current) return;
-    const offset = 55;
+    const offset = 48;
     const yPos = todayRef.current.offsetTop - offset;
     window.scrollTo({ top: yPos, behavior: "smooth" });
   });
 
   return (
-    <div className="flex flex-col gap-2 mt-2 mb-24">
+    <div className="flex flex-col mb-28">
       {dayKeys.map((key, id) => (
         <div key={id} ref={id === today ? todayRef : null}>
           <DayChipComponent dayId={id} />

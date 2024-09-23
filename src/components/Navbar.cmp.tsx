@@ -7,7 +7,7 @@ interface NavbarProps {
 
 export const NavbarComponent: React.FC<NavbarProps> = ({ groupName }) => {
   return (
-    <NextUINavbar position="sticky" isBordered height={"50px"}>
+    <NextUINavbar position="sticky" isBordered height={"3rem"} isBlurred={false}>
       <NavbarContent className="hidden flex basis-full" justify="center">
         <NavbarItem className="flex basis-full justify-center">
           <p className={title({ size: "sm" })}>Расписание&nbsp;</p>
