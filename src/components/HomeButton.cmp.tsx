@@ -9,7 +9,7 @@ export const HomeButtonComponent = () => {
   };
   return (
     <Button
-      className="rounded-full fixed bottom-7 left-7 w-14 h-14"
+      className="rounded-full fixed bottom-7 left-7 w-14 h-14 z-20"
       isIconOnly
       onClick={handleClick}
     >
