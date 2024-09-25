@@ -4,6 +4,7 @@ import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from 
 import { Divider } from "@nextui-org/divider";
 import React from "react";
 import { IConvertedCell } from "@/core/sheetConverter";
+import { Card, CardBody, CardHeader } from "@nextui-org/card";
 
 interface DisciplinesProps {
   disciplines: IConvertedCell[];
@@ -15,18 +16,17 @@ interface DisciplinesProps {
 // Элементы разделяет с помощью <Divider />
 const DisciplinesComponent: React.FC<DisciplinesProps> = ({ disciplines }) => {
   return (
-    <>
+    <Card className={`flex grid grid-cols-${disciplines.length} p-2`} radius="sm">
       {disciplines.map((discipline, id) => (
-        <React.Fragment key={id}>
-          {id > 0 && <Divider className="my-1" />}
+        <div key={id} className={id != 0 ? "border-l" : ""}>
           {discipline.text.split("\n").map((text, id) => (
-            <p className="text-xs" key={id}>
+            <p className="text-xs px-2" key={id}>
               {text}
             </p>
           ))}
-        </React.Fragment>
+        </div>
       ))}
-    </>
+    </Card>
   );
 };
 
@@ -37,20 +37,34 @@ interface PlaceProps {
 // Место проведения занятия одного ряда
 // Если есть гиперссылка, создает <Link />, если нет - <p>
 const PlaceComponent: React.FC<PlaceProps> = ({ place }) => {
-  if (!place) return null;
-  if (place.hyperlink) {
-    return (
-      <Link href={place.hyperlink} isExternal className="text-xs">
-        {place.text}
-      </Link>
-    );
+  var content: JSX.Element;
+  if (place) {
+    if (place.hyperlink) {
+      content = (
+        <Link href={place.hyperlink} isExternal className="text-xs">
+          {place.text}
+        </Link>
+      );
+    } else {
+      content = <p className="text-xs">{place.text}</p>;
+    }
   } else {
-    return <p className="text-xs">{place.text}</p>;
+    content = <p className="text-xs">-</p>;
   }
+
+  return (
+    <Card className="p-2 w-full items-center" radius="sm">
+      {content}
+    </Card>
+  );
 };
 
-const TextComponent: React.FC<{ text: string }> = ({ text }) => {
-  return <p className="text-xs">{text}</p>;
+const TimeComponent: React.FC<{ time: string }> = ({ time }) => {
+  return (
+    <Card className="py-2 px-4 items-center whitespace-nowrap" radius="sm">
+      <p className="text-xs">{time.replace(/(\d\d)-(\d\d)/, "$1:$2")}</p>
+    </Card>
+  );
 };
 
 interface DayCardProps {
@@ -59,27 +73,16 @@ interface DayCardProps {
 
 export const DayCardComponent: React.FC<DayCardProps> = ({ day }) => {
   return (
-    <Table isStriped aria-label="Example static collection table max-w-screen">
-      <TableHeader>
-        <TableColumn>Время</TableColumn>
-        <TableColumn>Дисциплина</TableColumn>
-        <TableColumn>Место</TableColumn>
-      </TableHeader>
-      <TableBody>
-        {day.map((row, id) => (
-          <TableRow key={id}>
-            <TableCell>
-              <TextComponent text={row.time.text} />
-            </TableCell>
-            <TableCell className="w-full">
-              <DisciplinesComponent disciplines={row.disciplines} />
-            </TableCell>
-            <TableCell className="text-center">
-              <PlaceComponent place={row.place} />
-            </TableCell>
-          </TableRow>
-        ))}
-      </TableBody>
-    </Table>
+    <div className="flex flex-col gap-4 p-2">
+      {day.map((row, id) => (
+        <div key={id} className="flex flex-col gap-1">
+          <div className="flex gap-1">
+            <TimeComponent time={row.time.text} />
+            <PlaceComponent place={row.place} />
+          </div>
+          <DisciplinesComponent disciplines={row.disciplines} />
+        </div>
+      ))}
+    </div>
   );
 };

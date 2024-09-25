@@ -11,10 +11,11 @@ export const LinkCardComponent: React.FC<LinkCardProps> = ({ thisUrl, externalUr
   return (
     <Card className="rounded-t-none z-10">
       <CardBody className="flex flex-col gap-2 items-center">
-        <Snippet symbol="📌" color="secondary" variant="flat" className="w-full">
+        <Snippet symbol="📌" color="secondary" variant="flat" className="w-full" size="sm">
           {thisUrl}
         </Snippet>
         <Link
+          size="sm"
           isExternal
           href={externalUrl}
           showAnchorIcon

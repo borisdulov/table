@@ -33,7 +33,7 @@ export const ThemeSwitchComponent: FC<ThemeSwitchProps> = ({ className, classNam
     <Component
       {...getBaseProps({
         className: clsx(
-          // Поменял только эту строчку, добавил стилей
+          // Поменял только эту строчку в файле – добавил стилей
           "px-px transition-opacity hover:opacity-80 cursor-pointer fixed bottom-7 right-7 bg-default rounded-full min-w-14 min-h-14 justify-center z-20",
           className,
           classNames?.base
