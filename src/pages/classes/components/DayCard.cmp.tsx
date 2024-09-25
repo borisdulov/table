@@ -3,6 +3,7 @@ import { Link } from "@nextui-org/link";
 import React from "react";
 import { IConvertedCell } from "@/core/sheetConverter";
 import { Card } from "@nextui-org/card";
+import { DayChipComponent } from "./DateCard.cmp";
 
 interface DisciplinesProps {
   disciplines: IConvertedCell[];
@@ -14,9 +15,9 @@ interface DisciplinesProps {
 // Элементы разделяет с помощью <Divider />
 const DisciplinesComponent: React.FC<DisciplinesProps> = ({ disciplines }) => {
   return (
-    <Card className={`grid grid-cols-${disciplines.length} p-2`} radius="sm">
+    <Card className={`flex-row p-2`} radius="sm">
       {disciplines.map((discipline, id) => (
-        <div key={id} className={id != 0 ? "border-l" : ""}>
+        <div key={id} className={`w-full ${id != 0 ? "border-l" : ""}`}>
           {discipline.text.split("\n").map((text, id) => (
             <p className="text-xs px-2" key={id}>
               {text}
@@ -71,7 +72,7 @@ interface DayCardProps {
 
 export const DayCardComponent: React.FC<DayCardProps> = ({ day }) => {
   return (
-    <div className="flex flex-col gap-4 p-2">
+    <Card className="gap-4 p-4">
       {day.map((row, id) => (
         <div key={id} className="flex flex-col gap-1">
           <div className="flex gap-1">
@@ -81,6 +82,6 @@ export const DayCardComponent: React.FC<DayCardProps> = ({ day }) => {
           <DisciplinesComponent disciplines={row.disciplines} />
         </div>
       ))}
-    </div>
+    </Card>
   );
 };

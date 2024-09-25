@@ -1,6 +1,6 @@
 import { IClassesWeek } from "@/core/classesParser";
 import { DayCardComponent } from "./DayCard.cmp";
-import { DayChipComponent } from "./DayChip.cmp";
+import { DayChipComponent } from "./DateCard.cmp";
 import { Skeleton } from "@nextui-org/skeleton";
 import React, { useEffect, useRef } from "react";
 
