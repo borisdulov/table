@@ -19,7 +19,7 @@ export const LinkCardComponent: React.FC<LinkCardProps> = ({ thisUrl, externalUr
           isExternal
           href={externalUrl}
           showAnchorIcon
-          className="flex w-full bg-blue-500 bg-opacity-20 rounded-xl p-2 justify-center"
+          className="flex w-full bg-blue-500 bg-opacity-20 rounded-md p-2 justify-center"
         >
           Оригинал
         </Link>

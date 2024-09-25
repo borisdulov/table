@@ -1,10 +1,8 @@
 import { IClassesDay } from "@/core/classesParser";
 import { Link } from "@nextui-org/link";
-import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@nextui-org/table";
-import { Divider } from "@nextui-org/divider";
 import React from "react";
 import { IConvertedCell } from "@/core/sheetConverter";
-import { Card, CardBody, CardHeader } from "@nextui-org/card";
+import { Card } from "@nextui-org/card";
 
 interface DisciplinesProps {
   disciplines: IConvertedCell[];
@@ -16,7 +14,7 @@ interface DisciplinesProps {
 // Элементы разделяет с помощью <Divider />
 const DisciplinesComponent: React.FC<DisciplinesProps> = ({ disciplines }) => {
   return (
-    <Card className={`flex grid grid-cols-${disciplines.length} p-2`} radius="sm">
+    <Card className={`grid grid-cols-${disciplines.length} p-2`} radius="sm">
       {disciplines.map((discipline, id) => (
         <div key={id} className={id != 0 ? "border-l" : ""}>
           {discipline.text.split("\n").map((text, id) => (

@@ -9,7 +9,7 @@ const DateComponent: React.FC<DateProps> = ({ targetDate }) => {
   const formattedDate = `${targetDate.getDate()}.${String(targetDate.getMonth() + 1).padStart(2, "0")}`;
 
   return (
-    <Chip color="default" variant="flat" className="justify-self-start">
+    <Chip color="default" variant="flat" className="justify-self-start" size="sm">
       {formattedDate}
     </Chip>
   );
@@ -21,7 +21,7 @@ interface DayOfWeekProps {
 
 const DayOfWeekComponent: React.FC<DayOfWeekProps> = ({ dayId }) => {
   return (
-    <Chip color="secondary" className="justify-self-center" variant="flat">
+    <Chip color="secondary" className="justify-self-center" variant="flat" size="sm">
       {daysOfWeek[dayId]}
     </Chip>
   );
@@ -38,19 +38,19 @@ const YesterdayTodayTomorrowComponent: React.FC<YesterdayTodayTomorrowProps> = (
   switch (today) {
     case dayId - 1:
       return (
-        <Chip color="warning" className={className} variant="flat">
+        <Chip color="warning" className={className} variant="flat" size="sm">
           Завтра
         </Chip>
       );
     case dayId:
       return (
-        <Chip color="success" className={className} variant="flat">
+        <Chip color="success" className={className} variant="flat" size="sm">
           Сегодня
         </Chip>
       );
     case dayId + 1:
       return (
-        <Chip color="default" className={className} variant="flat">
+        <Chip color="default" className={className} variant="flat" size="sm">
           Вчера
         </Chip>
       );
