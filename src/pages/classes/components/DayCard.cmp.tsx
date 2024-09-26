@@ -3,7 +3,6 @@ import { Link } from "@nextui-org/link";
 import React from "react";
 import { IConvertedCell } from "@/core/sheetConverter";
 import { Card } from "@nextui-org/card";
-import { DayChipComponent } from "./DateCard.cmp";
 
 interface DisciplinesProps {
   disciplines: IConvertedCell[];
