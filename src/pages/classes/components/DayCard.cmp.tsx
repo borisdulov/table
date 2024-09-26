@@ -18,7 +18,7 @@ const DisciplinesComponent: React.FC<DisciplinesProps> = ({ disciplines }) => {
       {disciplines.map((discipline, id) => (
         <div key={id} className={`w-full ${id != 0 ? "border-l" : ""}`}>
           {discipline.text.split("\n").map((text, id) => (
-            <p className="text-xs px-2" key={id}>
+            <p className="text-xs px-2 text-center" key={id}>
               {text}
             </p>
           ))}
