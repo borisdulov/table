@@ -9,7 +9,7 @@ const DateComponent: React.FC<DateProps> = ({ targetDate }) => {
   const formattedDate = `${targetDate.getDate()}.${String(targetDate.getMonth() + 1).padStart(2, "0")}`;
 
   return (
-    <Chip color="default" variant="flat" className="justify-self-start" size="sm">
+    <Chip color="default" variant="flat" className="justify-self-center" size="sm">
       {formattedDate}
     </Chip>
   );
@@ -33,7 +33,7 @@ interface YesterdayTodayTomorrowProps {
 
 const YesterdayTodayTomorrowComponent: React.FC<YesterdayTodayTomorrowProps> = ({ dayId }) => {
   const today = todayDayOfWeek();
-  const className = "flex justify-self-end";
+  const className = "flex justify-self-center";
 
   switch (today) {
     case dayId - 1:
