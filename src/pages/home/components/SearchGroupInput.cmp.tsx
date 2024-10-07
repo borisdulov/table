@@ -1,4 +1,3 @@
-import { SearchIcon } from "@/components/icons";
 import { Input } from "@nextui-org/input";
 
 export const SearchGroupInputComponent = ({
@@ -15,9 +14,6 @@ export const SearchGroupInputComponent = ({
       }}
       labelPlacement="outside"
       placeholder="Поиск по группам"
-      startContent={
-        <SearchIcon className="text-base text-default-400 pointer-events-none flex-shrink-0" />
-      }
       type="search"
       onValueChange={onValueChange}
     />

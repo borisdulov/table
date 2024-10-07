@@ -1,10 +1,10 @@
 import { ClassesPage } from "@/pages/classes/Classes.page";
-import { IndexPage } from "@/pages/index/Index.page";
+import { HomePage } from "@/pages/home/home.page";
 
 export const routes = {
   index: {
     path: "/",
-    Component: IndexPage,
+    Component: HomePage,
   },
   classes: {
     path: "/:groupName",

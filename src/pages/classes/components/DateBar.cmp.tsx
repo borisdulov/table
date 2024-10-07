@@ -68,7 +68,7 @@ interface DayChipProps {
   dayId: number;
 }
 
-export const DayChipComponent: React.FC<DayChipProps> = ({ dayId }) => {
+export const DateBarComponent: React.FC<DayChipProps> = ({ dayId }) => {
   const currentDate = new Date();
   const dayOffset = dayId - todayDayOfWeek();
   const targetDate = new Date(currentDate.getTime() + dayOffset * 24 * 60 * 60 * 1000);

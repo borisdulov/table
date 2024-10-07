@@ -2,7 +2,9 @@ import { IClassesDay } from "@/core/classesParser";
 import { Link } from "@nextui-org/link";
 import React from "react";
 import { IConvertedCell } from "@/core/sheetConverter";
-import { Card } from "@nextui-org/card";
+import { Card, CardBody, CardFooter } from "@nextui-org/card";
+import { Divider } from "@nextui-org/divider";
+import { Badge } from "@nextui-org/badge";
 
 interface DisciplinesProps {
   disciplines: IConvertedCell[];
@@ -14,17 +16,17 @@ interface DisciplinesProps {
 // Элементы разделяет с помощью <Divider />
 const DisciplinesComponent: React.FC<DisciplinesProps> = ({ disciplines }) => {
   return (
-    <Card className="flex-row p-2 mt-1" radius="sm">
+    <div className="flex flex-row mt-1">
       {disciplines.map((discipline, id) => (
         <div key={id} className={`w-full ${id != 0 ? "border-l" : ""}`}>
           {discipline.text.split("\n").map((text, id) => (
-            <p className="text-xs px-2 text-center" key={id}>
+            <div className="text-xs px-2 text-center" key={id}>
               {text}
-            </p>
+            </div>
           ))}
         </div>
       ))}
-    </Card>
+    </div>
   );
 };
 
@@ -50,17 +52,32 @@ const PlaceComponent: React.FC<PlaceProps> = ({ place }) => {
     content = <p className="text-xs">–</p>;
   }
 
-  return (
-    <Card className="p-2 w-full items-center" radius="sm">
-      {content}
-    </Card>
-  );
+  return <div className="w-full text-center">{content}</div>;
 };
 
 const TimeComponent: React.FC<{ time: string }> = ({ time }) => {
   return (
-    <Card className="py-2 px-4 items-center whitespace-nowrap" radius="sm">
-      <p className="text-xs font-bold">{time.replace(/(\d\d)-(\d\d)/, "$1:$2")}</p>
+    <div className="text-xs font-bold text-center w-full">
+      {time.replace(/(\d\d)-(\d\d)/, "$1:$2")}
+    </div>
+  );
+};
+
+interface DisciplinesAndPlaceProps {
+  disciplines: IConvertedCell[];
+  place: IConvertedCell | undefined;
+}
+
+const DisciplinesAndPlace: React.FC<DisciplinesAndPlaceProps> = ({ disciplines, place }) => {
+  return (
+    <Card>
+      <CardBody>
+        <DisciplinesComponent disciplines={disciplines} />
+      </CardBody>
+      <Divider />
+      <CardFooter>
+        <PlaceComponent place={place} />
+      </CardFooter>
     </Card>
   );
 };
@@ -73,24 +90,19 @@ export const DayCardComponent: React.FC<DayCardProps> = ({ day }) => {
   let prevTime: string;
 
   return (
-    <Card className=" p-4">
+    <div className="flex flex-col gap-2">
       {day.map((row, id) => {
         const currentTime = row.time.text;
         const showTime = currentTime !== prevTime;
         prevTime = currentTime;
 
         return (
-          <div key={id} className="flex flex-col">
-            {showTime && (
-              <div className="flex gap-1 mt-4">
-                <TimeComponent time={row.time.text} />
-                <PlaceComponent place={row.place} />
-              </div>
-            )}
-            <DisciplinesComponent disciplines={row.disciplines} />
+          <div key={id} className="flex flex-col gap-2">
+            {showTime && <TimeComponent time={row.time.text} />}
+            <DisciplinesAndPlace place={row.place} disciplines={row.disciplines} />
           </div>
         );
       })}
-    </Card>
+    </div>
   );
 };

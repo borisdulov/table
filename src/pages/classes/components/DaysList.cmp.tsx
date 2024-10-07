@@ -1,6 +1,6 @@
 import { IClassesWeek } from "@/core/classesParser";
 import { DayCardComponent } from "./DayCard.cmp";
-import { DayChipComponent } from "./DateCard.cmp";
+import { DateBarComponent } from "./DateBar.cmp";
 import { Skeleton } from "@nextui-org/skeleton";
 import React, { useEffect, useRef } from "react";
 
@@ -27,10 +27,10 @@ export const DaysListComponent: React.FC<DaysListProps> = ({ week }) => {
   });
 
   return (
-    <div className="flex flex-col mb-28">
+    <div className="flex flex-col m-2">
       {dayKeys.map((key, id) => (
         <div key={id} ref={id === today ? todayRef : null}>
-          <DayChipComponent dayId={id} />
+          <DateBarComponent dayId={id} />
           <DayCardComponent day={week[key]} />
         </div>
       ))}

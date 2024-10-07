@@ -19,7 +19,12 @@ export const SheetTypeSelectorComponent: React.FC<SheetTypeSelectorProps> = ({
   };
 
   return (
-    <Tabs size="lg" onSelectionChange={handleSelectionChange} disabledKeys={["tests", "gia"]}>
+    <Tabs
+      size="lg"
+      onSelectionChange={handleSelectionChange}
+      disabledKeys={["tests", "gia"]}
+      radius="sm"
+    >
       <Tab key="classes" title="Занятий"></Tab>
       <Tab key="tests" title="Зачетов"></Tab>
       <Tab key="gia" title="ГИА"></Tab>
